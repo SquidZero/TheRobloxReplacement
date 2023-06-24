@@ -1,0 +1,109 @@
+[gd_scene load_steps=8 format=3 uid="uid://dsxk6m7jktmjt"]
+
+[sub_resource type="Shader" id="Shader_c6mdf"]
+code = "shader_type canvas_item;
+
+uniform float red = 0.5;
+uniform float blue = 0.5;
+uniform float green = 0.5;
+uniform float alpha = 1.0;
+uniform float red_offset = 0.2;
+uniform float blue_offset = 0.2;
+uniform float green_offset = 0.2;
+
+// Called for each pixel
+void fragment() {
+	// Place fragment code here.
+	COLOR += vec4(red, green, blue, alpha);
+	COLOR.r -= (UV.x + (red_offset*sin(TIME)*1000.0));
+	COLOR.b += (UV.x + (blue_offset/sin(TIME*2.0)*1000.0));
+	COLOR.g -= (UV.y + green_offset);
+	COLOR = vec4(1.0 - COLOR.r, 1.0 - COLOR.g, 1.0 - COLOR.b, alpha);
+	//COLOR.b = blue;
+}
+
+void vertex() {
+	//VERTEX += vec2(cos(TIME)*100.0, sin(TIME)*100.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gvrue"]
+shader = SubResource("Shader_c6mdf")
+shader_parameter/red = 0.5
+shader_parameter/blue = 0.5
+shader_parameter/green = 0.5
+shader_parameter/alpha = 0.5
+shader_parameter/red_offset = 0.001
+shader_parameter/blue_offset = 0.001
+shader_parameter/green_offset = -0.001
+
+[sub_resource type="Gradient" id="Gradient_5idel"]
+offsets = PackedFloat32Array(0, 0.516129, 1)
+colors = PackedColorArray(0.158718, 0.0819118, 0.350844, 1, 0.46064, 2.16588e-06, 0.291757, 1, 0.254902, 0, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vknma"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_maylo"]
+invert = true
+color_ramp = SubResource("Gradient_5idel")
+noise = SubResource("FastNoiseLite_vknma")
+
+[sub_resource type="InputEventKey" id="InputEventKey_o45gj"]
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_hqo6m"]
+events = [SubResource("InputEventKey_o45gj"), null]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_gvrue")
+position = Vector2(675, 382)
+scale = Vector2(8.0669, 5.26904)
+texture = SubResource("NoiseTexture2D_maylo")
+
+[node name="Button" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 352.0
+offset_top = 158.0
+offset_right = 769.0
+offset_bottom = 414.0
+shortcut = SubResource("Shortcut_hqo6m")
+text = "start game"
+
+[node name="UniquePeerId" type="Label" parent="."]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 39.0
+offset_right = 247.0
+offset_bottom = 62.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 127.0
+offset_top = 124.0
+offset_right = 167.0
+offset_bottom = 147.0
+
+[node name="Host" type="Button" parent="."]
+layout_mode = 0
+offset_left = 331.0
+offset_top = 183.0
+offset_right = 685.0
+offset_bottom = 224.0
+text = "Host
+"
+
+[node name="Join" type="Button" parent="."]
+layout_mode = 0
+offset_left = 338.0
+offset_top = 133.0
+offset_right = 683.0
+offset_bottom = 172.0
+text = "Join
+"

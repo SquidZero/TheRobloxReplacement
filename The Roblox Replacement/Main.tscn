@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://2876nlanrmf1"]
+
+[ext_resource type="Script" path="res://MultiplayerManager.cs" id="1_vguc1"]
+[ext_resource type="Shader" path="res://Chromatic Abberation.gdshader" id="2_kut6m"]
+[ext_resource type="PackedScene" uid="uid://dsxk6m7jktmjt" path="res://Menu.tscn" id="2_p1vxx"]
+[ext_resource type="PackedScene" uid="uid://dlp8p204epg40" path="res://floor.tscn" id="3_l7ieu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k0flt"]
+shader = ExtResource("2_kut6m")
+shader_parameter/alpha = 1.0
+shader_parameter/red_offset = 0.0
+shader_parameter/green_offset = 0.003
+shader_parameter/blue_offset = -0.003
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_angnh"]
+viewport_path = NodePath("Chromatic Abberation/SubViewport")
+
+[node name="Node" type="Node"]
+script = ExtResource("1_vguc1")
+
+[node name="Chromatic Abberation" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_k0flt")
+position = Vector2(553, 342)
+scale = Vector2(8.24023, 6.27539)
+texture = SubResource("ViewportTexture_angnh")
+
+[node name="SubViewport" type="SubViewport" parent="Chromatic Abberation"]
+
+[node name="Control" parent="." instance=ExtResource("2_p1vxx")]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="StaticBody3Dd" parent="Node3D" instance=ExtResource("3_l7ieu")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -3.61635, -9.04566, -4.23303)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -0.921185, 0.389124, 0, -0.389124, -0.921185, 0, 0, 0)

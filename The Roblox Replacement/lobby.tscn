@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhaor7ljkdgr1"]
+
+[ext_resource type="Script" path="res://lobby.gd" id="1_ngbiw"]
+
+[node name="lobby" type="Node"]
+script = ExtResource("1_ngbiw")
+
+[node name="players" type="Node" parent="."]

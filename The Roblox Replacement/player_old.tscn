@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bls0roblj48ft"]
+
+[ext_resource type="Script" path="res://CharacterBodyController.gd" id="1_socpc"]
+[ext_resource type="PackedScene" uid="uid://cvqywlc0ovq0b" path="res://player.tscn" id="2_wlmta"]
+
+[node name="Player" type="Marker3D"]
+script = ExtResource("1_socpc")
+
+[node name="PlayerBody" parent="." instance=ExtResource("2_wlmta")]

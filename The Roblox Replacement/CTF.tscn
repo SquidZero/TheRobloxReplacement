@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmci7jpahy1gs"]
+
+[ext_resource type="Script" path="res://CTF.cs" id="1_fg1wm"]
+
+[node name="CTF" type="Node"]
+script = ExtResource("1_fg1wm")

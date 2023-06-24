@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://bd0y8h0myqr36"]
+
+[ext_resource type="PackedScene" uid="uid://cgfqxu73jlnnk" path="res://chromatic_abberation.tscn" id="1_644lo"]
+[ext_resource type="PackedScene" uid="uid://dlp8p204epg40" path="res://floor.tscn" id="2_hwm8n"]
+[ext_resource type="Script" path="res://GenericEnemy.cs" id="3_5me33"]
+[ext_resource type="PackedScene" uid="uid://cvqywlc0ovq0b" path="res://player.tscn" id="3_f5itj"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3haop"]
+viewport_path = NodePath("Sprite2D/SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v7dnu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t85c2"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0mtir"]
+material = SubResource("StandardMaterial3D_t85c2")
+
+[node name="test" type="Node3D"]
+
+[node name="Chromatic Abberation" parent="." instance=ExtResource("1_644lo")]
+texture = SubResource("ViewportTexture_3haop")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.1287, 0)
+
+[node name="StaticBody3Dd" parent="." instance=ExtResource("2_hwm8n")]
+
+[node name="PlayerBody" parent="." instance=ExtResource("3_f5itj")]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." groups=["Enemies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9021, -1.70032, -10.9227)
+continuous_cd = true
+freeze_mode = 1
+constant_force = Vector3(0, -1, 0)
+script = ExtResource("3_5me33")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_v7dnu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_0mtir")

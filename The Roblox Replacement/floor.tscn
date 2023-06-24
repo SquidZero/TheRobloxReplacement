@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlp8p204epg40"]
+
+[ext_resource type="Shader" path="res://Shaders/Chromatic Abberation.gdshader" id="1_bshnj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dov1v"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4j8yy"]
+shader = ExtResource("1_bshnj")
+shader_parameter/alpha = 1.0
+shader_parameter/red_offset = 0.01
+shader_parameter/green_offset = 0.5
+shader_parameter/blue_offset = 0.3
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_v883v"]
+material = SubResource("ShaderMaterial_4j8yy")
+size = Vector2(10, 10)
+
+[node name="StaticBody3Dd" type="StaticBody3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -18.4238, -3.52976, -17.6869)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("BoxShape3D_dov1v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.0500755, 0.00195503, -0.0871906)
+mesh = SubResource("PlaneMesh_v883v")
+skeleton = NodePath("")

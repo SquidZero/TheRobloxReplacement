@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvqywlc0ovq0b"]
+
+[ext_resource type="Script" path="res://CharacterBodyController.gd" id="1_a41ij"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eag2b"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yjayy"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wn1d0"]
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5834, 0)
+script = ExtResource("1_a41ij")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_eag2b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_yjayy")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.698332, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Marker3D"]
+
+[node name="RayCast3D" type="RayCast3D" parent="Marker3D/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.78073)
+target_position = Vector3(0, 0, -1000)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, -0.00564432, 0.642462, -0.564989)
+visibility_range_begin = 1.0
+mesh = SubResource("CylinderMesh_wn1d0")

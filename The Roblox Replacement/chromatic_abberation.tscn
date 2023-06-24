@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgfqxu73jlnnk"]
+
+[ext_resource type="Shader" path="res://Shaders/Chromatic Abberation.gdshader" id="1_g62yw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k0flt"]
+shader = ExtResource("1_g62yw")
+shader_parameter/alpha = 1.0
+shader_parameter/red_offset = 0.0
+shader_parameter/green_offset = 0.003
+shader_parameter/blue_offset = -0.003
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fyynf"]
+viewport_path = NodePath("Sprite2D/SubViewport")
+
+[node name="Chromatic Abberation" type="Sprite2D"]
+material = SubResource("ShaderMaterial_k0flt")
+position = Vector2(553, 342)
+scale = Vector2(8.24023, 6.27539)
+texture = SubResource("ViewportTexture_fyynf")
+
+[node name="SubViewport" type="SubViewport" parent="."]
